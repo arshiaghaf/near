@@ -4,7 +4,7 @@
 
 <h1 align="center">Near</h1>
 
-A little pink way to ask someone to reach out. **Exactly two equal users, one monkey button, and one fixed Telegram signal sent only after a deliberate tap.**
+Near is a private two-person app for sending a preset notification with a tap. Each user can send the same fixed message to a configured Telegram destination.
 
 ## Start with your agent
 
@@ -21,24 +21,24 @@ in reviewed stages. Keep secrets out of chat and ask before any external
 stage I have not already authorized.
 ```
 
-Your agent can inspect prerequisites, prepare private configuration, run local checks, and guide the Cloudflare, VPS, and Telegram steps. You'll still choose your accounts and hostnames, enter credentials privately, approve external actions, share invitations privately, and complete the passkey prompts. This is a guided setup, with checkpoints along the way.
+Your agent can inspect prerequisites, prepare private configuration, run local checks, and guide the Cloudflare, VPS, and Telegram steps. You'll still choose your accounts and hostnames, enter credentials privately, approve external actions, share invitations privately, and complete the passkey prompts. The setup proceeds in reviewed stages.
 
 [Copy the full agent prompt](AGENT_SETUP_PROMPT.md) · [Follow the manual setup guide](docs/SETUP.md) · [Read the validation record](VALIDATION.md)
 
 ## How Near works
 
-I originally built Near for someone I care about, to make reaching out a little easier when words felt difficult. One small gesture lets someone know you’d welcome their company.
+I originally built Near for someone I care about, to make reaching out easier when words felt difficult. A notification lets someone know you would welcome their company.
 
 Each person receives a private, single-use invitation and registers one passkey. Both get the same access and the same monkey button. The deployment owner handles maintenance from a separate local terminal; neither account has administrator powers in the app.
 
-There are no message choices, freeform text, reminders, analytics, or signal history. A confirmed result means Telegram accepted the request; it does not mean someone saw it. An uncertain result is shown honestly, and revealing an existing outcome never sends again.
+There are no message choices, freeform text, reminders, analytics, or signal history. A confirmed result means Telegram accepted the request; it does not mean someone saw it. The app reports an uncertain result when delivery cannot be confirmed. Revealing an existing outcome never sends again.
 
 <p align="center">
   <img src="site/protected-assets/monkey/pending-monkey.png" width="120" alt="A baby monkey with open arms, used for a pending request">
   <img src="site/protected-assets/monkey/confirmed-monkey.png" width="120" alt="A baby monkey hugging a pink heart, used for a confirmed request">
 </p>
 
-## Try it locally yourself
+## Try it locally
 
 The demo needs no Cloudflare, VPS, or Telegram account and sends nothing. With Git, npm, and Node.js installed, run these commands from a directory where a new `near` folder is safe to create:
 
@@ -53,11 +53,11 @@ Open the two synthetic invitation URLs printed in the terminal in separate brows
 
 Node.js 24.22.2+ is required for local tooling and builds; `.node-version` pins 24.22.2, matching CI. Node 22 users must upgrade before installing dependencies. Cloudflare Workers keep their separate compatibility settings. The local demo and maintenance CLI do not support native Windows. `npm run dev` is an inert visual preview. Optional automated demo checks and their limits are in the setup guide.
 
-## Give it a home
+## Hosted setup
 
 Hosted setup uses your own permanent app domain, Cloudflare account, isolated Ubuntu VPS, and separate Telegram bot with one private destination.
 
-| Piece | Its job |
+| Component | Purpose |
 | --- | --- |
 | Cloudflare Worker + OpenNext + D1 | Serve the app, verify passkeys and opaque sessions, coordinate bounded signal state |
 | Isolated Go relay on your VPS | Authorize the Worker's exact mTLS client certificate and send the fixed Telegram message |
